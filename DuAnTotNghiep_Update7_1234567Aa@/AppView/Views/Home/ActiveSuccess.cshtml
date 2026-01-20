@@ -1,0 +1,14 @@
+﻿@{
+    Layout = "_Layout";
+}
+<div style=" text-align: center;">
+    @if (!string.IsNullOrEmpty((string) TempData["SuccessMessage"]))
+    {
+        <h3>@TempData["SuccessMessage"]</h3>
+        <p>Bạn đã kích hoạt tài khoản thành công. Vui lòng đăng nhập !.</p>
+        <a asp-action="Login" asp-route-actionName="Index" class="btn btn-primary">Đăng nhập</a>
+    } else
+    {
+        <h3>@ViewBag.ErrorMessage</h3>
+    }
+</div>

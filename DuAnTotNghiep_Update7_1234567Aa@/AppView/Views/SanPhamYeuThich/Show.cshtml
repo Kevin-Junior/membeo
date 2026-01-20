@@ -1,0 +1,115 @@
+﻿@using AppData.Models
+@using AppData.ViewModels;
+@using AppView.PhanTrang
+@model PhanTrangBase<SanPhamYeuThich>
+@{
+    Layout = "_Layout";
+}
+<style>
+    #navbar {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 10px 0px 10px 0px;
+        background-color: white;
+        /*margin-bottom:24px;*/
+    }
+
+    #AllHoaDon {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        background-color: white;
+    }
+
+    #navbar div label {
+        margin: 0px;
+    }
+
+        #navbar div label span {
+            cursor: pointer;
+            padding: 10px;
+        }
+
+    #navbar input[type="radio"] {
+        display: none;
+    }
+
+    #navbar label input[type="radio"]:checked ~ span {
+        border-bottom: 1px solid black;
+    }
+
+    .adon a:hover {
+        color: black;
+    }
+
+    .VrgkXA {
+        padding: 12px 0;
+        margin: 12px 0;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 1px 1px 0 rgba(0,0,0,.05);
+        color: #212121;
+        background: white;
+        border-radius: 2px;
+    }
+
+        .VrgkXA > input {
+            flex: 1;
+            font-size: 14px;
+            line-height: 16px;
+            border: 0;
+            outline: none;
+            background-color: inherit;
+        }
+</style>
+<section style="background-color: #eee;">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="https://localhost:5001/">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Sản phẩm yêu thích</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div id="AllHoaDon" style="display:inherit;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Mã Sản Phẩm</th>
+                        <th scope="col">Tên Sản Phẩm</th>
+                        <th scope="col">Mô Tả</th>
+                        <th scope="col">Chức Năng</th>
+                    </tr>
+                </thead>
+                <tbody id="DShoaDon">
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td>@item.IDSP</td>
+                            <td>@item.SanPham.Ten</td>
+                            <td>@item.SanPham.MoTa</td>
+                            <td>
+                                <button type="button" class="btn btn-danger">
+                                    @Html.ActionLink("Xoá", "Delete", new { Id = item.Id }, new { @style = "color:white;" })
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+
+                <ul id="pagination-demo" class="pagination"></ul>
+
+            </div>
+        </div>
+    </div>
+</section>
+<script src="/js/jquery-3.3.1.min.js"></script>

@@ -1,0 +1,5 @@
+Tạo App Password https://myaccount.google.com/apppasswords
+Sửa thông tin trong file AppAPI/appsettings.json
+ "SenderEmail": "dia_chi_email@gmail.com",
+ "UserName": "dia_chi_email@gmail.com",
+ "Password": "<app password viết liền>"

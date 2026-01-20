@@ -1,0 +1,39 @@
+﻿@media print {
+    /* print.css */
+
+    /* Set background color to white and text color to black for better print visibility */
+    body {
+        background-color: white;
+        color: black;
+    }
+
+    /* Adjust font size and style for improved readability */
+    body {
+        font-size: 14pt; /* Increase font size for better legibility */
+        font-family: Arial, sans-serif; /* Use a sans-serif font for easier reading */
+        line-height: 1.6; /* Increase line height for better readability */
+    }
+
+    /* Hide navigation menu for cleaner print */
+    .navigation {
+        display: none;
+    }
+
+    /* Add margin to the top and bottom of each printed page */
+    @page {
+        margin: 20mm;
+    }
+
+    /* Highlight hyperlinks by underlining them */
+    a {
+        text-decoration: underline; /* Underline hyperlinks for better visibility */
+        color: #007bff; /* Blue color for hyperlinks */
+    }
+
+        /* Style hyperlinks to apitemplate.io */
+        a[href="https://www.apitemplate.io"] {
+            font-style: italic; /* Italics for hyperlinks to apitemplate.io */
+            color: #007bff; /* Blue color for hyperlinks */
+            text-decoration: none; /* Remove underline for hyperlinks to apitemplate.io */
+        }
+}

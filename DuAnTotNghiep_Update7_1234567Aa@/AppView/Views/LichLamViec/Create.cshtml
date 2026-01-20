@@ -1,0 +1,96 @@
+﻿@model AppData.Models.LichLamViec
+
+@{
+    Layout = "~/Views/Shared/_LayoutForAdmin.cshtml";
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    ViewData["Title"] = "Create";
+}
+<h4>Thêm mới lịch làm việc</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div class="alert alert-danger">
+                @ViewBag.ErrorMessage
+            </div>
+        }
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdNhanVien" class="control-label">Nhân Viên</label>
+                <select asp-for="IdNhanVien" asp-items="ViewBag.DSNhanVien" class="form-control" autocomplete=off>
+                </select>
+                <div id="emptyIdNhanVienError" class="invalid-feedback d-none">Vui lòng chọn nhân viên!</div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label">Ngày</label>
+                <input asp-for="Date" type="date" class="form-control" autocomplete="off" />
+                <div id="emptyDateError" class="invalid-feedback d-none">Vui lòng chọn ngày !</div>
+            </div>
+            <div class="form-group">
+                <label asp-for="CongViec" class="control-label">Công Việc</label>
+                <input asp-for="CongViec" class="form-control" autocomplete="off" />
+                <div id="emptyCongViecError" class="invalid-feedback d-none">Vui lòng nhập vào công việc !</div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Lưu" class="btn btn-primary" style="margin-top: 10px" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $("select[name='IdNhanVien']").on("change", function () {
+        $(this).removeClass("is-invalid");
+        $("#emptyIdNhanVienError").text("");
+    });
+
+    $("input[name='Date']").on("input", function() {
+        $(this).removeClass("is-invalid");
+        $("#emptyDateError").text("");
+    });
+
+    $("input[name='CongViec']").on("input", function() {
+        $(this).removeClass("is-invalid");
+        $("#emptyCongViecError").text("");
+    });
+
+    $("form").submit(function () {
+
+        var selectIdNhanVien = $("select[name='IdNhanVien']");
+        var idNhanVien = selectIdNhanVien.val();
+        if (idNhanVien.trim() === "") {
+            selectIdNhanVien.addClass("is-invalid");
+            $("#emptyIdNhanVienError").text("Vui lòng chọn nhân viên");
+            return false;
+        }
+
+        var date = $("input[name='Date']");
+        var dateValue = date.val();
+        if (dateValue.trim() === "") {
+            date.addClass('is-invalid');
+            $("#emptyDateError").text("Vui lòng chọn ngày !");
+            return false;
+        }
+
+        var noiDungInput = $("input[name='NoiDung']");
+        var noiDungValue =noiDungInput.val();
+        if (noiDungValue.trim() === "") {
+            noiDungInput.addCalss('is-invalid');
+            $("#emptyNoiDungError").text("Vui lòng nhập vào nội dung công việc !");
+            return false;
+        }
+
+        return true;
+    });
+</script>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

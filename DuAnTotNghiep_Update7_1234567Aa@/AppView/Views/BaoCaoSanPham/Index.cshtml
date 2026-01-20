@@ -1,0 +1,66 @@
+﻿@model IEnumerable<AppView.ViewModels.CTSanPhamVM>
+
+@{
+    Layout =  "~/Views/Shared/_LayoutForAdmin.cshtml";
+    int stt = 1;
+}
+
+<h1>
+    <b>Danh sách sản phẩm </b>
+</h1>
+<table class="table" style="margin-left: 20px">
+    <thead style=" background-color: darkslategray">
+        <tr>
+            <th style=" background-color: darkslategray;
+    color: white;">STT</th>
+            <th style=" background-color: darkslategray;
+    color: white;">Hình Ảnh</th>
+            <th style=" background-color: darkslategray;
+    color: white;">Tên</th>
+            <th style=" background-color: darkslategray;
+    color: white;">Mô tả</th>
+            <th style=" background-color: darkslategray;
+    color: white;">Số lượng</th>
+            <th style=" background-color: darkslategray;
+    color: white;">Đơn giá</th>
+            <th style=" background-color: darkslategray;
+    color: white;">Đã bán</th>
+            <th style=" background-color: darkslategray"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>@stt</td>
+                <td><img src="/img/product/@Html.DisplayFor(modelItem => item.HinhAnh)" style="display: block; object-fit: cover;background-position: center; max-width: 100%; max-height: 180px;"/></td>
+                <td>@Html.DisplayFor(modelItem => item.TenSP)</td>
+                <td>
+                   @Html.DisplayFor(modelItem => item.MoTa)
+                </td>
+                <td>
+                    @item.SoLuong
+                </td>
+                <td>
+                    @item.DonGia
+                </td>
+                <td>
+                    @item.DaBan
+                </td>
+                <td style="text-align:end">
+                   
+                </td>
+                @{
+                    stt++;
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    @* <script>
+        window.print();
+    </script> *@
+}

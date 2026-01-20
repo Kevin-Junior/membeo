@@ -1,0 +1,70 @@
+﻿@using AppView.ViewModels
+@model IEnumerable<ThongKeChiTieuNamVM>
+
+@{
+    ViewData["Title"] = "ThongKeDoanhThuTheoNam";
+    Layout = "~/Views/Shared/_LayoutForAdmin.cshtml";
+}
+
+<h2>Thống Kê Chi Tiêu Theo Năm</h2>
+
+@* <form method="GET" asp-controller="ThongKeChiTieu" asp-action="ThongKeTheoTuan">
+    <label for="tuanInput"> Tuần :</label>
+    <select name="tuan" id="tuanInput">
+    @foreach (int w in (List<int>)ViewBag.Weeks)
+    {
+        <option value="@w">Tuần @w</option>
+    }
+    </select>
+    <button type="submit">Thống Kê</button>
+</form> *@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div>
+    <canvas id="columnChart"></canvas>
+</div>
+
+<script>
+    let labels = [];
+    let data = [];
+
+    @foreach (var result in Model)
+    {
+        <text >labels.push('Năm @result.Nam ');</text>
+        <text>data.push('@result.Value');</text>
+    }
+
+    var ctx = document.getElementById('columnChart').getContext('2d');
+    var columnChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Chi Tiêu Theo Năm',
+                data: data,
+                backgroundColor: ' #0d6efd',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 0.5
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Chi Phí'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Năm'
+                    },
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        }
+    });
+</script>
