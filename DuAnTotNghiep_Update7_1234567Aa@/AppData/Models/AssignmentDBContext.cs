@@ -43,7 +43,7 @@ namespace AppData.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=ADMIN-PC;Initial Catalog=thoitrang2;Integrated Security=True");
+            optionsBuilder.UseSqlServer(@"Data Source=.\SQLEXPRESS;Initial Catalog=thoitrang2;Integrated Security=True");
         }
         //THUYNHU\SQLEXPRESS
         //DESKTOP-UOIH77U\SQLEXPRESS
